@@ -1,0 +1,22 @@
+package org.example.proyectofinal.Services.VideoCallService;
+
+import javafx.scene.image.ImageView;
+
+public class VideoCallService {
+    public VideoCallSender videoCallSender;
+    public VideoCallConsumer videoCallReceiver;
+    public VideoCallService(String receiverIp, ImageView consumerImageView, ImageView senderImageView) {
+        videoCallSender = new VideoCallSender(receiverIp, senderImageView);
+        videoCallReceiver = new VideoCallConsumer(consumerImageView);
+    }
+
+    public void start() {
+        videoCallSender.start();
+        videoCallReceiver.start();
+    }
+
+    public void stop() {
+        videoCallSender.interrupt();
+        videoCallReceiver.interrupt();
+    }
+}

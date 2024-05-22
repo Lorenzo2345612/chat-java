@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.image.ImageView?>
+<HBox alignment="CENTER" spacing="10" xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx/17" fx:controller="org.example.proyectofinal.HelloController">
+        <VBox>
+            <ListView fx:id="listView" prefHeight="200.0" prefWidth="200.0" />
+            <HBox>
+                <TextField fx:id="addContactTextField" prefHeight="20" prefWidth="150"/>
+                <Button fx:id="addContactButton" text="Add Contact" onAction="#addContact"/>
+            </HBox>
+        </VBox>
+        <VBox fx:id="chatBox" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: red;">
+            <HBox>
+                <Button text="Send File" onAction="#sendFile"/>
+                <Button text="Start Video Call" onAction="#startVideoCall"/>
+            </HBox>
+            <ListView fx:id="currentChatMessages" prefHeight="180" prefWidth="200"/>
+            <HBox>
+                <TextField fx:id="messageField" prefHeight="20" prefWidth="150"/>
+                <Button fx:id="sendButton" text="Send Message" onAction="#sendMessage"/>
+            </HBox>
+        </VBox>
+    <VBox fx:id="videoCallBox">
+        <ImageView fx:id="senderImageView" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="consumerImageView" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+    </VBox>
+</HBox>

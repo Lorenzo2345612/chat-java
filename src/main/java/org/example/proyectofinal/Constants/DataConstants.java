@@ -12,4 +12,5 @@ public class DataConstants {
     public static final int AUDIO_CALL_PORT = 5024;
     public static final int AUDIO_CALL_PORT_REQUEST = 5025;
     public static final int MAX_PACKET_SIZE = 1024; // Tamaño máximo del paquete UDP
+    public static final int MAX_AUDIO_PACKET_SIZE = 640; // Tamaño máximo del paquete de audio
 }

@@ -24,7 +24,7 @@ public class AudioSenderService extends Thread {
             targetDataLine.start();
 
             OutputStream outputStream = socket.getOutputStream();
-            byte[] buffer = new byte[DataConstants.MAX_PACKET_SIZE];
+            byte[] buffer = new byte[DataConstants.MAX_AUDIO_PACKET_SIZE];
             int bytesRead;
             while ((bytesRead = targetDataLine.read(buffer, 0, buffer.length)) > 0) {
                 outputStream.write(buffer, 0, bytesRead);

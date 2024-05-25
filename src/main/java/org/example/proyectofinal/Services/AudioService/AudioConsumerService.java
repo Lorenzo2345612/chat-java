@@ -41,14 +41,14 @@ public class AudioConsumerService extends Thread {
             InputStream inputStream = socket.getInputStream();
             BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
 
-                AudioFormat audioFormat = new AudioFormat(8000.0f, 16, 2, true, true);
+                AudioFormat audioFormat = new AudioFormat(16000.0f, 16, 1, true, true);
                 DataLine.Info dataLineInfo = new DataLine.Info(SourceDataLine.class, audioFormat);
                 SourceDataLine sourceDataLine = (SourceDataLine) AudioSystem.getLine(dataLineInfo);
 
                 sourceDataLine.open(audioFormat);
                 sourceDataLine.start();
 
-                byte[] buffer = new byte[DataConstants.MAX_PACKET_SIZE];
+                byte[] buffer = new byte[DataConstants.MAX_AUDIO_PACKET_SIZE];
                 int bytesRead;
 
                 while ((bytesRead = bufferedInputStream.read(buffer, 0, buffer.length)) != -1) {

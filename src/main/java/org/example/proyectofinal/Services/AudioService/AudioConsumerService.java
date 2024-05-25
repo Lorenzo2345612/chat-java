@@ -13,17 +13,27 @@ import java.net.Socket;
 
 public class AudioConsumerService extends Thread {
     private final String host;
+    private boolean isConnected = false;
     public AudioConsumerService(String host) {
         this.host = host;
     }
     public void run() {
-        try (Socket socket = new Socket(host, DataConstants.AUDIO_CALL_PORT)) {
+        Socket socket = null;
+        while (!isConnected) {
+            try {
+                socket = new Socket(host, DataConstants.AUDIO_CALL_PORT);
+                isConnected = true;
+            } catch (IOException e) {
+                System.out.println("Waiting for connection");
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException interruptedException) {
+                    interruptedException.printStackTrace();
 
-            receiveAudio(socket);
-        } catch (Exception e) {
-            e.printStackTrace();
-
+                }
+            }
         }
+        receiveAudio(socket);
     }
 
     private void receiveAudio(Socket socket) {

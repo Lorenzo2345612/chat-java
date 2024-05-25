@@ -21,11 +21,13 @@ public class VideoCallConsumer extends Thread {
     private Map<Integer, byte[]> currentFrame;
     private int numberOfPackets = -1;
     private int currentFrameLength = 0;
+    private String senderIp;
     public boolean running = true;
 
-    public VideoCallConsumer(ImageView imageView) {
+    public VideoCallConsumer(ImageView imageView, String senderIp) {
         this.imageView = imageView;
         currentFrame = new HashMap<>();
+        this.senderIp = senderIp;
     }
 
     public void run() {
@@ -47,6 +49,9 @@ public class VideoCallConsumer extends Thread {
         byte[] newPacket = new byte[DataConstants.MAX_PACKET_SIZE + 4];
         DatagramPacket datagramPacket = new DatagramPacket(newPacket, newPacket.length);
         datagramSocket.receive(datagramPacket);
+        if (senderIp != null && !datagramPacket.getAddress().getHostAddress().equals(senderIp)) {
+            return null;
+        }
         byte[] packetData = datagramPacket.getData();
         int packetNumber = ByteBuffer.wrap(packetData, 0, 4).getInt();
         if ( packetNumber == 0 ) {

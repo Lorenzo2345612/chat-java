@@ -7,7 +7,7 @@ public class VideoCallService {
     public VideoCallConsumer videoCallReceiver;
     public VideoCallService(String receiverIp, ImageView consumerImageView, ImageView senderImageView) {
         videoCallSender = new VideoCallSender(receiverIp, senderImageView);
-        videoCallReceiver = new VideoCallConsumer(consumerImageView);
+        videoCallReceiver = new VideoCallConsumer(consumerImageView, receiverIp);
     }
 
     public void start() {

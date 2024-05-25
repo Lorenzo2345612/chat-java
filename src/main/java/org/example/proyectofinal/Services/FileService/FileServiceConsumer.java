@@ -33,9 +33,32 @@ public class FileServiceConsumer extends Thread{
 
                 byte[] buffer = new byte[4096];
                 int bytesRead;
+                double startTime = System.currentTimeMillis();
                 long totalBytesRead = 0;
+                long lastBytesRead = 0;
+
                 while (totalBytesRead < fileLength && (bytesRead = dataInputStream.read(buffer)) != -1) {
                     fileOutputStream.write(buffer, 0, bytesRead);
+                    double endTime = System.currentTimeMillis();
+                    Thread.sleep((int)(Math.random() * 1000));
+                    if (endTime - startTime > 1000) {
+                        double seconds = (endTime - startTime) / 1000;
+                        double bps = (totalBytesRead - lastBytesRead) * 8 / seconds;
+                        if (bps > 1000000000){
+                            bps = bps / 1000000000;
+                            System.out.println("Seconds: " + seconds +" Gbps: " + bps);
+                        } else if (bps > 1000000){
+                            bps = bps / 1000000;
+                            System.out.println("Seconds: " + seconds +" Mbps: " + bps);
+                        } else if (bps > 1000){
+                            bps = bps / 1000;
+                            System.out.println("Seconds: " + seconds +" Kbps: " + bps);
+                        } else if (bps > 0){
+                            System.out.println("Seconds: " + seconds +" bps: " + bps);
+                        }
+                        startTime = endTime;
+                        lastBytesRead = totalBytesRead;
+                    }
                     totalBytesRead += bytesRead;
                 }
 
@@ -43,6 +66,8 @@ public class FileServiceConsumer extends Thread{
 
             } catch (IOException e) {
                 System.err.println("File transfer error: " + e.getMessage());
+            } catch (Exception e) {
+                System.err.println("Error: " + e.getMessage());
             }
 
         } catch (IOException e) {

@@ -20,6 +20,7 @@ import org.example.proyectofinal.Constants.DataConstants;
 import org.example.proyectofinal.Controllers.VideoCallController;
 import org.example.proyectofinal.Model.ChatModel;
 import org.example.proyectofinal.Model.VideoModel;
+import org.example.proyectofinal.Services.AudioService.AudioService;
 import org.example.proyectofinal.Services.FileService.FileService;
 import org.example.proyectofinal.Services.MessageService.MessageServiceConsumer;
 import org.example.proyectofinal.Services.MessageService.MessageServiceSender;
@@ -78,6 +79,7 @@ public class HelloController {
     @FXML
     private ImageView consumerImageView;
     private VideoCallService videoCallService;
+    private AudioService audioService;
 
     public void initialize() {
         setUpChatList();
@@ -103,10 +105,29 @@ public class HelloController {
         if (currentChat == null) {
             return;
         }
+        endVideoCall();
         videoModel.setIsAbleToSee(true);
         videoCallService = new VideoCallService( currentChat, consumerImageView, senderImageView);
         videoCallService.start();
+        audioService = new AudioService(currentChat);
+        audioService.start();
 
+    }
+
+    private void endVideoCall() {
+        videoModel.setIsAbleToSee(false);
+        if (videoCallService != null) {
+            System.out.println("Stopping video call");
+            videoCallService.stop();
+            videoCallService = null;
+            consumerImageView.setImage(null);
+            senderImageView.setImage(null);
+        }
+        if (audioService != null) {
+            System.out.println("Stopping audio call");
+            audioService.stop();
+            audioService = null;
+        }
     }
 
     public void sendMessage() throws Exception {
@@ -175,11 +196,6 @@ public class HelloController {
             currentChat = chat;
             chatModel.setIsAbleToSee(true);
             videoModel.setIsAbleToSee(false);
-            if (videoCallService != null) {
-                System.out.println("Stopping video call");
-                videoCallService.stop();
-                videoCallService = null;
-            }
             currentChatMessages.setItems(messages.get(chat));
         });
     }

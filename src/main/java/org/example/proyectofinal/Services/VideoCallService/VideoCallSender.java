@@ -30,9 +30,9 @@ public class VideoCallSender extends Thread {
     }
 
     public void run() {
+        VideoCapture videoCapture = new VideoCapture(0);
         try {
             datagramSocket = new DatagramSocket();
-            VideoCapture videoCapture = new VideoCapture(0);
             Mat frame = new Mat();
             while (true) {
                 videoCapture.read(frame);
@@ -77,6 +77,8 @@ public class VideoCallSender extends Thread {
             }
             videoCapture.release();
         } catch (Exception e) {
+        } finally {
+            videoCapture.release();
         }
     }
 

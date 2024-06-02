@@ -38,7 +38,7 @@ public class FileServiceConsumer extends Thread{
             String fileName = dataInputStream.readUTF();
             long fileLength = dataInputStream.readLong();
 
-            try (FileOutputStream fileOutputStream = new FileOutputStream(DataConstants.PATH_TO_SAVE + fileName)) {
+            try (FileOutputStream fileOutputStream = new FileOutputStream(DataConstants.getDownloadPath() + fileName)) {
 
                 byte[] buffer = new byte[4096];
                 int bytesRead;

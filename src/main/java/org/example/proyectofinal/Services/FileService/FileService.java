@@ -1,13 +1,14 @@
 package org.example.proyectofinal.Services.FileService;
 
+import javafx.scene.text.Text;
 import org.example.proyectofinal.Constants.DataConstants;
 
 import java.net.Socket;
 
 public class FileService {
     public final FileServiceConsumer fileServiceConsumer;
-    public FileService() {
-        fileServiceConsumer = new FileServiceConsumer();
+    public FileService(Text text) {
+        fileServiceConsumer = new FileServiceConsumer(text);
         fileServiceConsumer.start();
     }
 

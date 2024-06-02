@@ -39,16 +39,9 @@ public class FileServiceSender extends Thread {
             while ((read = fileInputStream.read(buffer)) > 0) {
                 outputStream.write(buffer, 0, read);
             }
-            fileInputStream.close();
-            outputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            try {
-                socket.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
 

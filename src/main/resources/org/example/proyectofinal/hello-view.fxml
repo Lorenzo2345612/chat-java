@@ -19,11 +19,12 @@
             </HBox>
         </VBox>
         <VBox fx:id="chatBox" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: red;">
+            <Text fx:id="fileTransferText" text="No se esta recibiendo ningun archivo" />
             <HBox>
                 <Button text="Send File" onAction="#sendFile"/>
                 <Button text="Start Video Call" onAction="#startVideoCall"/>
             </HBox>
-            <ListView fx:id="currentChatMessages" prefHeight="180" prefWidth="200"/>
+            <ListView fx:id="currentChatMessages" prefHeight="250" prefWidth="250"/>
             <HBox>
                 <TextField fx:id="messageField" prefHeight="20" prefWidth="150"/>
                 <Button fx:id="sendButton" text="Send Message" onAction="#sendMessage"/>

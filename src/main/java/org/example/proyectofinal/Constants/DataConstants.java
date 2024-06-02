@@ -7,7 +7,7 @@ public class DataConstants {
     public static final int IN_MESSAGE_PORT = 5020;
     public static final int OUT_MESSAGE_PORT = 5021;
     public static final int IN_FILE_PORT = 5022;
-    public static final String PATH_TO_SAVE = "C:\\Users\\loren\\OneDrive\\Escritorio\\Courses\\redes\\frames\\";
+    public static final String PATH_TO_SAVE = System.getProperty("user.home")+System.getProperty("file.separator")+"Downloads"+System.getProperty("file.separator");
     public static final int VIDEO_CALL_PORT = 5023;
     public static final int AUDIO_CALL_PORT = 5024;
     public static final int AUDIO_CALL_PORT_REQUEST = 5025;

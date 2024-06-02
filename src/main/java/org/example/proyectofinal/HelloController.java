@@ -68,7 +68,7 @@ public class HelloController {
     @FXML
     private FileChooser fileChooser;
 
-    private final FileService fileService = new FileService();
+    private FileService fileService;
 
     // Video Call
     @FXML
@@ -81,6 +81,9 @@ public class HelloController {
     private VideoCallService videoCallService;
     private AudioService audioService;
 
+    @FXML
+    private Text fileTransferText;
+
     public void initialize() {
         setUpChatList();
         messages = new HashMap<>();
@@ -89,6 +92,7 @@ public class HelloController {
         videoModel = new VideoModel();
         chatBox.visibleProperty().bind(chatModel.isAbleToSeeProperty());
         videoCallBox.visibleProperty().bind(videoModel.isAbleToSeeProperty());
+        fileService = new FileService(fileTransferText);
     }
 
     public void startMessageConsumer() {

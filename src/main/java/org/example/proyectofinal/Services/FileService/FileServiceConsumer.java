@@ -69,7 +69,7 @@ public class FileServiceConsumer extends Thread{
 
 
 
-                Platform.runLater(() -> text.setText("Transferencia de archivo completada"));
+                Platform.runLater(() -> text.setText("Transferencia de archivo completada en " + ((System.currentTimeMillis() - realStartTime) / 1000) + " segundos"));
 
             } catch (IOException e) {
                 System.err.println("File transfer error: " + e.getMessage());

@@ -18,7 +18,7 @@
                 <Button fx:id="addContactButton" text="Add Contact" onAction="#addContact"/>
             </HBox>
         </VBox>
-        <VBox fx:id="chatBox" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: red;">
+        <VBox fx:id="chatBox" prefHeight="200.0" prefWidth="200.0">
             <Text fx:id="fileTransferText" text="No se esta recibiendo ningun archivo" />
             <HBox>
                 <Button text="Send File" onAction="#sendFile"/>

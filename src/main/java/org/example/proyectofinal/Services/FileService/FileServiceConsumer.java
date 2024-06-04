@@ -52,7 +52,6 @@ public class FileServiceConsumer extends Thread{
                     System.out.println(new String(buffer));
                     fileOutputStream.write(buffer, 0, bytesRead);
                     double endTime = System.currentTimeMillis();
-                    Thread.sleep(10);
                     if (endTime - startTime > 1000) {
                         double seconds = (endTime - startTime) / 1000;
                         double bps = (totalBytesRead - lastBytesRead) * 8 / seconds;
